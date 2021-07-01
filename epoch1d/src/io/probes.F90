@@ -172,6 +172,15 @@ CONTAINS
               TRIM(probe_name), it_probe_real, c_dump_part_pz, &
               part_probe_offset, convert)
 
+          ! dump time_at_probe
+#ifdef PROBE_TIME
+          WRITE(temp_name, '(a, ''/time_at_probe'')') TRIM(probe_name)
+          CALL sdf_write_point_variable(sdf_handle, TRIM(temp_name), &
+              TRIM(temp_name), TRIM(probe_name), '', npart_probe_global, &
+              TRIM(probe_name), it_probe_real, c_dump_probe_time, &
+              part_probe_offset, convert)
+#endif
+
           ! dump particle weight function
           WRITE(temp_name, '(a, ''/weight'')') TRIM(probe_name)
 #ifndef PER_SPECIES_WEIGHT
