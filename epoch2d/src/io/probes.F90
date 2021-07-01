@@ -286,6 +286,15 @@ CONTAINS
       END DO
 #endif
 
+#ifdef PROBE_TIME
+    CASE (c_dump_probe_time)
+      DO WHILE (ASSOCIATED(cur) .AND. (part_count < npoint_it))
+        part_count = part_count+1
+        array(part_count) = cur%probe_time
+        cur => cur%next
+      END DO
+#endif
+
     CASE (c_dump_part_px)
       ndim = 1
       DO WHILE (ASSOCIATED(cur) .AND. (part_count < npoint_it))
